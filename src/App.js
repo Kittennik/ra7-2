@@ -9,7 +9,7 @@ const RatingArticle = Rating(Article);
 function Article(props) {
     return (
         <div className="item item-article">
-            <h3><a href="#">{props.title}</a></h3>
+            <h3><a href="#0">{props.title}</a></h3>
             <p className="views">Прочтений: {props.views}</p>
         </div>
     )
@@ -18,26 +18,29 @@ function Article(props) {
 function Video(props) {
     return (
         <div className="item item-video">
-            <iframe src={props.url} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe title="video" src={props.url} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <p className="views">Просмотров: {props.views}</p>
         </div>
     )
 };
 
 function List(props) {
-    return props.list.map(item => {
-        switch (item.type) {
-            case 'video':
-                return (
-                    <RatingVideo {...item} key={shortid.generate()} />
-                );
+  return props.list.map((item) => {
+    switch (item.type) {
+      case 'video':
+        return (
+          <RatingVideo {...item} key={shortid.generate()} />
+        );
 
-            case 'article':
-                return (
-                    <RatingArticle {...item} key={shortid.generate()} />
-                );
-        }
-    });
+      case 'article':
+        return (
+          <RatingArticle {...item} key={shortid.generate()} />
+        );
+
+      default:
+        return '';
+    }
+  });
 };
 
 export default function App() {
